@@ -1,22 +1,27 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.routines.Routine;
 
 public class ClawSystem extends Subsystem
 {
-    private Servo shoulder_servo;
+    private Servo shoulder_servo_l;
+
+    private Servo shoulder_servo_r;
+
     private Servo claw_servo_l;
     private Servo claw_servo_r;
 
 
-    public Servo getShoulder_servo() {
-        return shoulder_servo;
-    }
+    //public Servo getShoulder_servo() {
+    //    return shoulder_servo;
+    //}
 
+    public Servo getShoulder_servo_l() { return shoulder_servo_l; }
+    public Servo getShoulder_servo_r() { return shoulder_servo_r; }
     public Servo getClaw_servo_l() {
         return claw_servo_l;
     }
@@ -37,8 +42,11 @@ public class ClawSystem extends Subsystem
     }
 
     public void setShoulderPos(double pos){
-        this.shoulder_servo.setPosition(pos);
+        this.shoulder_servo_l.setPosition(pos);
+        this.shoulder_servo_r.setPosition(pos);
     }
+
+
 
     public void openClaw(){
         this.setClawPos(this.OPEN);
@@ -72,24 +80,30 @@ public class ClawSystem extends Subsystem
         if(rightBump == leftBump){
             return;
         }
-        if(rightBump && this.shoulder_servo.getPosition() <= 0.42){
-            setShoulderPos(this.shoulder_servo.getPosition() + 0.001);
+        if(rightBump){
+            setShoulderPos(this.shoulder_servo_l.getPosition() + 0.005);
         }
         if(leftBump){
-            setShoulderPos(this.shoulder_servo.getPosition() - 0.001);
+            setShoulderPos(this.shoulder_servo_l.getPosition() - 0.005);
         }
 
     }
+
+
+
+
 
     public ClawSystem(Routine routine) {
         super(routine);
         claw_servo_l = routine.hardwareMap.get(Servo.class, "claw_servo_l");
         claw_servo_r = routine.hardwareMap.get(Servo.class, "claw_servo_r");
-        shoulder_servo = routine.hardwareMap.get(Servo.class, "shoulder_servo");
-
+        shoulder_servo_r = routine.hardwareMap.get(Servo.class, "shoulder_servo_r");
+        shoulder_servo_l = routine.hardwareMap.get(Servo.class, "shoulder_servo_l");
         claw_servo_r.setDirection(Servo.Direction.REVERSE);
+        shoulder_servo_l.setPosition(0);
+        shoulder_servo_r.setPosition(0);
 
-        shoulder_servo.setPosition(0.42);
+
         this.toggleClaw(true);
 
     }
