@@ -1,12 +1,11 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.routines.Routine;
 
-public class ClawSystem extends Subsystem
+public class ClawSystemBackup extends Subsystem
 {
     private Servo shoulder_servo_l;
 
@@ -16,9 +15,9 @@ public class ClawSystem extends Subsystem
     private Servo claw_servo_r;
 
 
-    /*public Servo getShoulder_servo() {
-        return shoulder_servo;
-    }*/
+    //public Servo getShoulder_servo() {
+    //    return shoulder_servo;
+    //}
 
     public Servo getShoulder_servo_l() { return shoulder_servo_l; }
     public Servo getShoulder_servo_r() { return shoulder_servo_r; }
@@ -76,30 +75,15 @@ public class ClawSystem extends Subsystem
 
     }
     //lower bound 0.425, upper bound 0.0
-    public void shoulderOnTick(boolean rightBump, boolean leftBump, boolean leftSlowBump, boolean rightSlowBump){
-        if((rightBump == leftBump) && (leftSlowBump == rightSlowBump)){
+    public void shoulderOnTick(boolean rightBump, boolean leftBump){
+        if(rightBump == leftBump){
             return;
         }
-        if(rightBump && (this.shoulder_servo_l.getPosition() < 0.85) ){
+        if(rightBump){
             setShoulderPos(this.shoulder_servo_l.getPosition() + 0.005);
-            setShoulderPos(this.shoulder_servo_r.getPosition() + 0.005);
-
         }
-        if(leftBump  && (this.shoulder_servo_l.getPosition() > 0.06)){
+        if(leftBump){
             setShoulderPos(this.shoulder_servo_l.getPosition() - 0.005);
-            setShoulderPos(this.shoulder_servo_r.getPosition() - 0.005);
-
-        }
-
-        if(rightSlowBump && (this.shoulder_servo_l.getPosition() < 0.85) ){
-            setShoulderPos(this.shoulder_servo_l.getPosition() + 0.001);
-            setShoulderPos(this.shoulder_servo_r.getPosition() + 0.001);
-
-        }
-        if(leftSlowBump  && (this.shoulder_servo_l.getPosition() > 0.06)){
-            setShoulderPos(this.shoulder_servo_l.getPosition() - 0.001);
-            setShoulderPos(this.shoulder_servo_r.getPosition() - 0.001);
-
         }
 
     }
@@ -108,15 +92,15 @@ public class ClawSystem extends Subsystem
 
 
 
-    public ClawSystem(Routine routine) {
+    public ClawSystemBackup(Routine routine) {
         super(routine);
         claw_servo_l = routine.hardwareMap.get(Servo.class, "claw_servo_l");
         claw_servo_r = routine.hardwareMap.get(Servo.class, "claw_servo_r");
         shoulder_servo_r = routine.hardwareMap.get(Servo.class, "shoulder_servo_r");
         shoulder_servo_l = routine.hardwareMap.get(Servo.class, "shoulder_servo_l");
         claw_servo_r.setDirection(Servo.Direction.REVERSE);
-        shoulder_servo_l.setPosition(0.8667);
-        shoulder_servo_r.setPosition(0.8667);
+        shoulder_servo_l.setPosition(0);
+        shoulder_servo_r.setPosition(0);
 
 
         this.toggleClaw(true);

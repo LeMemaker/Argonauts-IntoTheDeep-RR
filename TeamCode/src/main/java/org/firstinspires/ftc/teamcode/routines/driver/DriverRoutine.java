@@ -35,7 +35,7 @@ public class DriverRoutine extends Routine {
 			telemetry.addData("Left Servo Claw", clawSystem.getClaw_servo_l().getPosition());
 			telemetry.addData("Right Servo Claw", clawSystem.getClaw_servo_r().getPosition());
 
-			clawSystem.shoulderOnTick(gamepad1.a, gamepad1.y);
+			clawSystem.shoulderOnTick(gamepad1.a, gamepad1.y, gamepad1.b, gamepad1.x);
 			telemetry.addData("Shoulder Position", clawSystem.getShoulder_servo_l().getPosition());
 			driveSystem.driveOnTick(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
