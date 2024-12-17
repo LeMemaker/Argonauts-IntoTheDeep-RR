@@ -21,8 +21,7 @@ public class ClawTestRoutine extends Routine {
 
         while(opModeIsActive()){
             clawSystem.toggleClaw(gamepad1.b);
-            telemetry.addData("Left Servo Claw", clawSystem.getClaw_servo_l().getPosition());
-            telemetry.addData("Right Servo Claw", clawSystem.getClaw_servo_r().getPosition());
+            telemetry.addData("Servo Claw", clawSystem.getClaw_servo().getPosition());
             telemetry.update();
         }
 
