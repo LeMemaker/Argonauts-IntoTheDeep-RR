@@ -39,7 +39,7 @@ public class DriverRoutine extends Routine {
 			clawSystem.shoulderOnTick(gamepad1.a, gamepad1.y, gamepad1.b, gamepad1.x);
 			telemetry.addData("Shoulder Position", clawSystem.getShoulder_servo_l().getPosition());
 
-			clawSystem.extensionOnTick(gamepad1.x);
+			clawSystem.extensionOnTick(gamepad1.left_bumper);
 			telemetry.addData("Extension", clawSystem.getExt_servo().getPosition());
 
 			driveSystem.driveOnTick(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);

@@ -31,12 +31,15 @@ public class ClawSystem extends Subsystem
         return ext_servo;
     }
 
-    final double OPEN = 0;
+    final double OPEN = 0.30;
     final double CLOSE = 0.75;// TEST THEM OUT AFTERNOON
 
-    final double EXTENDED = 0.45;
+    final double EXTENDED = 0.25;
 
-    final double RETRACTED = 0.55;
+    final double RETRACTED = 0.65;
+
+    final double FRONT_LIMIT = 0.06;
+    final double BACK_LIMIT = 0.85;
 
     private boolean openChanged = false;
 
@@ -84,23 +87,23 @@ public class ClawSystem extends Subsystem
         if((rightBump == leftBump) && (leftSlowBump == rightSlowBump)){
             return;
         }
-        if(rightBump && (this.shoulder_servo_l.getPosition() < 0.85) ){
+        if(rightBump && (this.shoulder_servo_l.getPosition() < BACK_LIMIT) ){
             setShoulderPos(this.shoulder_servo_l.getPosition() + 0.005);
             setShoulderPos(this.shoulder_servo_r.getPosition() + 0.005);
 
         }
-        if(leftBump  && (this.shoulder_servo_l.getPosition() > 0.06)){
+        if(leftBump  && (this.shoulder_servo_l.getPosition() > FRONT_LIMIT)){
             setShoulderPos(this.shoulder_servo_l.getPosition() - 0.005);
             setShoulderPos(this.shoulder_servo_r.getPosition() - 0.005);
 
         }
 
-        if(rightSlowBump && (this.shoulder_servo_l.getPosition() < 0.85) ){
+        if(rightSlowBump && (this.shoulder_servo_l.getPosition() < BACK_LIMIT) ){
             setShoulderPos(this.shoulder_servo_l.getPosition() + 0.001);
             setShoulderPos(this.shoulder_servo_r.getPosition() + 0.001);
 
         }
-        if(leftSlowBump  && (this.shoulder_servo_l.getPosition() > 0.06)){
+        if(leftSlowBump  && (this.shoulder_servo_l.getPosition() > FRONT_LIMIT)){
             setShoulderPos(this.shoulder_servo_l.getPosition() - 0.001);
             setShoulderPos(this.shoulder_servo_r.getPosition() - 0.001);
 
@@ -127,8 +130,8 @@ public class ClawSystem extends Subsystem
         shoulder_servo_r = routine.hardwareMap.get(Servo.class, "shoulder_servo_r");
         shoulder_servo_l = routine.hardwareMap.get(Servo.class, "shoulder_servo_l");
         ext_servo = routine.hardwareMap.get(Servo.class, "ext_servo");
-        shoulder_servo_l.setPosition(0.8667);
-        shoulder_servo_r.setPosition(0.8667);
+        shoulder_servo_l.setPosition(FRONT_LIMIT);
+        shoulder_servo_r.setPosition(FRONT_LIMIT);
 
 
         this.toggleClaw(true);
