@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.subsystems.ViperSystem;
 public class DriverRoutine extends Routine {
 	public ViperSystem viperSystem;
 	public ClawSystem clawSystem;
-	DriveSystem driveSystem;
+	public DriveSystem driveSystem;
 
 	@Override
 	public void onInit() {

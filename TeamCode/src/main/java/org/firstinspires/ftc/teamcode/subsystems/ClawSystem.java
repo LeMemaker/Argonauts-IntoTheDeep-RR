@@ -34,9 +34,9 @@ public class ClawSystem extends Subsystem
     final double OPEN = 0;
     final double CLOSE = 0.75;// TEST THEM OUT AFTERNOON
 
-    final double EXTENDED = 0;
+    final double EXTENDED = 0.45;
 
-    final double RETRACTED = 0.75;
+    final double RETRACTED = 0.55;
 
     private boolean openChanged = false;
 
@@ -126,6 +126,7 @@ public class ClawSystem extends Subsystem
         claw_servo = routine.hardwareMap.get(Servo.class, "claw_servo");
         shoulder_servo_r = routine.hardwareMap.get(Servo.class, "shoulder_servo_r");
         shoulder_servo_l = routine.hardwareMap.get(Servo.class, "shoulder_servo_l");
+        ext_servo = routine.hardwareMap.get(Servo.class, "ext_servo");
         shoulder_servo_l.setPosition(0.8667);
         shoulder_servo_r.setPosition(0.8667);
 
