@@ -41,6 +41,9 @@ public class ClawSystem extends Subsystem
     final double FRONT_LIMIT = 0.06;
     final double BACK_LIMIT = 0.85;
 
+    final double Submersive_Position = 0.35;// Test this tomorrow
+    final double Basket_Position = 0.65
+
     private boolean openChanged = false;
 
     private  boolean isOpen = true;
@@ -106,6 +109,18 @@ public class ClawSystem extends Subsystem
         if(leftSlowBump  && (this.shoulder_servo_l.getPosition() > FRONT_LIMIT)){
             setShoulderPos(this.shoulder_servo_l.getPosition() - 0.001);
             setShoulderPos(this.shoulder_servo_r.getPosition() - 0.001);
+
+        }
+
+    }
+
+    public void presetPosition(boolean leftArrow, boolean rightArrow){
+        if(leftArrow){
+            setShoulderPos(Submersive_Position);
+
+        }
+        if(rightArrow){
+            setShoulderPos(Basket_Position);
 
         }
 
