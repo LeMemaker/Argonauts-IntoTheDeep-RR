@@ -32,7 +32,7 @@ public class ClawSystem extends Subsystem
     }
 
     final double OPEN = 0.30;
-    final double CLOSE = 0.75;// TEST THEM OUT AFTERNOON
+    final double CLOSE = 0.7;// TEST THEM OUT AFTERNOON
 
     final double EXTENDED = 0.25;
 
