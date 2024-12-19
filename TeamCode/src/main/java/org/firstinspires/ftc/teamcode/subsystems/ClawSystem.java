@@ -41,8 +41,12 @@ public class ClawSystem extends Subsystem
     final double FRONT_LIMIT = 0.06;
     final double BACK_LIMIT = 0.85;
 
-    final double Submersive_Position = 0.35;// Test this tomorrow
-    final double Basket_Position = 0.65
+    final double CENTER_POS = 0.35;// Test these 4 tomorrow
+    final double BASKET_POS = 0.65;
+
+    final double SPEC_POS = 0.5;
+
+    final double CHAMBER_POS = 0.5;
 
     private boolean openChanged = false;
 
@@ -116,11 +120,11 @@ public class ClawSystem extends Subsystem
 
     public void presetPosition(boolean leftArrow, boolean rightArrow){
         if(leftArrow){
-            setShoulderPos(Submersive_Position);
+            setShoulderPos(CENTER_POS);
 
         }
         if(rightArrow){
-            setShoulderPos(Basket_Position);
+            setShoulderPos(BASKET_POS);
 
         }
 
