@@ -90,19 +90,15 @@ public class ClawSystem extends Subsystem
 
     }
     //lower bound 0.425, upper bound 0.0
-    public void shoulderOnTick(boolean rightBump, boolean leftBump, boolean leftSlowBump, boolean rightSlowBump){
-        if((rightBump == leftBump) && (leftSlowBump == rightSlowBump)){
+    public void shoulderOnTick(boolean chamberButton, boolean specimenButton, boolean leftSlowBump, boolean rightSlowBump){
+        if(leftSlowBump == rightSlowBump){
             return;
         }
-        if(rightBump && (this.shoulder_servo_l.getPosition() < BACK_LIMIT) ){
-            setShoulderPos(this.shoulder_servo_l.getPosition() + 0.005);
-            setShoulderPos(this.shoulder_servo_r.getPosition() + 0.005);
-
+        if(chamberButton){
+            setShoulderPos(CHAMBER_POS);
         }
-        if(leftBump  && (this.shoulder_servo_l.getPosition() > FRONT_LIMIT)){
-            setShoulderPos(this.shoulder_servo_l.getPosition() - 0.005);
-            setShoulderPos(this.shoulder_servo_r.getPosition() - 0.005);
-
+        if(specimenButton){
+            setShoulderPos(SPEC_POS);
         }
 
         if(rightSlowBump && (this.shoulder_servo_l.getPosition() < BACK_LIMIT) ){
