@@ -44,7 +44,7 @@ public class ClawSystem extends Subsystem
     final double CENTER_POS = 0.35;// Test these 4 tomorrow
     final double BASKET_POS = 0.65;
 
-    final double SPEC_POS = 0.5;
+    final double SPEC_POS = 0.775;
 
     final double CHAMBER_POS = 0.5;
 
