@@ -32,7 +32,7 @@ public class ClawSystem extends Subsystem
     }
 
     final double OPEN = 0.30;
-    final double CLOSE = 0.75;// TEST THEM OUT AFTERNOON
+    final double CLOSE = 0.7;// TEST THEM OUT AFTERNOON
 
     final double EXTENDED = 0.25;
 
@@ -44,7 +44,7 @@ public class ClawSystem extends Subsystem
     final double CENTER_POS = 0.35;// Test these 4 tomorrow
     final double BASKET_POS = 0.65;
 
-    final double SPEC_POS = 0.5;
+    final double SPEC_POS = 0.775;
 
     final double CHAMBER_POS = 0.5;
 
@@ -90,19 +90,15 @@ public class ClawSystem extends Subsystem
 
     }
     //lower bound 0.425, upper bound 0.0
-    public void shoulderOnTick(boolean rightBump, boolean leftBump, boolean leftSlowBump, boolean rightSlowBump){
-        if((rightBump == leftBump) && (leftSlowBump == rightSlowBump)){
+    public void shoulderOnTick(boolean chamberButton, boolean specimenButton, boolean leftSlowBump, boolean rightSlowBump){
+        if(leftSlowBump == rightSlowBump){
             return;
         }
-        if(rightBump && (this.shoulder_servo_l.getPosition() < BACK_LIMIT) ){
-            setShoulderPos(this.shoulder_servo_l.getPosition() + 0.005);
-            setShoulderPos(this.shoulder_servo_r.getPosition() + 0.005);
-
+        if(chamberButton){
+            setShoulderPos(CHAMBER_POS);
         }
-        if(leftBump  && (this.shoulder_servo_l.getPosition() > FRONT_LIMIT)){
-            setShoulderPos(this.shoulder_servo_l.getPosition() - 0.005);
-            setShoulderPos(this.shoulder_servo_r.getPosition() - 0.005);
-
+        if(specimenButton){
+            setShoulderPos(SPEC_POS);
         }
 
         if(rightSlowBump && (this.shoulder_servo_l.getPosition() < BACK_LIMIT) ){
