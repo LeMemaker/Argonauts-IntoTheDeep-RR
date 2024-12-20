@@ -42,6 +42,34 @@ public class DriveSystem extends Subsystem
         getDrive_motor_br().setPower((y + x - rx));
     }
 
+    public void driveOnTickVector(double x, double y, double rx){
+        x = -x;
+        rx = -rx;
+        double theta = Math.atan2(y, x);
+        double power = Math.hypot(x, y);
+
+        double sin = Math.sin(theta - Math.PI/4);
+        double cos = Math.cos(theta - Math.PI/4);
+        double max = Math.max(Math.abs(sin), Math.abs(cos));
+
+        double leftFront = power * cos/max + rx;
+        double rightFront = power * sin/max - rx;
+        double leftRear = power * sin/max + rx;
+        double rightRear = power * cos/max - rx;
+
+        if ((power + Math.abs(rx)) > 1) {
+            leftFront   /= power + Math.abs(rx);
+            rightFront /= power + Math.abs(rx);
+            leftRear    /= power + Math.abs(rx);
+            rightRear  /= power + Math.abs(rx);
+        }
+
+        getDrive_motor_fl().setPower(leftFront);
+        getDrive_motor_fr().setPower(-rightFront);
+        getDrive_motor_bl().setPower(leftRear);
+        getDrive_motor_br().setPower(-rightRear);
+    }
+
     public DriveSystem(Routine routine)
     {
         super(routine);
