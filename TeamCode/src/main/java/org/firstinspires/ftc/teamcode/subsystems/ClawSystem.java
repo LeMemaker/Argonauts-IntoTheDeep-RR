@@ -32,7 +32,9 @@ public class ClawSystem extends Subsystem
     public Servo getExt_servo(){
         return ext_servo;
     }
+    private double setPos;
 
+    private double deltaPos;
     final double OPEN = 0.30;
     final double CLOSE = 0.7;// TEST THEM OUT AFTERNOON
 
@@ -57,11 +59,21 @@ public class ClawSystem extends Subsystem
         this.claw_servo.setPosition(pos);
     }
 
+    public double getSetPos(){
+        return setPos;
+    }
+
+    public double getDeltaPos(){
+        return deltaPos;
+    }
+
     public void setShoulderPos(double pos){
         this.shoulder_servo_l.setPosition(pos);
         this.shoulder_servo_r.setPosition(pos);
     }
-    public boolean slowShoulder(double pos){
+
+
+    public void slowShoulder(double pos){
         isHasReached = false;
         double cur = this.shoulder_servo_l.getPosition();
         for(double i=cur; Math.abs(i-pos)>=0.005; i+=(pos-cur)/500.0)
@@ -69,7 +81,7 @@ public class ClawSystem extends Subsystem
             setShoulderPos(i);
             isHasReached = true;
         }
-        return isHasReached;
+        return;
 
     }
 
@@ -102,6 +114,7 @@ public class ClawSystem extends Subsystem
     }
     //lower bound 0.425, upper bound 0.0
     public void shoulderOnTick(boolean leftSlowBump, boolean rightSlowBump){
+
         if(leftSlowBump == rightSlowBump){
             return;
         }
@@ -121,25 +134,26 @@ public class ClawSystem extends Subsystem
     }
 
     public void presetPosition(boolean leftArrow, boolean rightArrow, boolean chamberButton, boolean specimenButton){
-        if(leftArrow){
-            if(slowShoulder(CENTER_POS))
-                return;
+
+        if(leftArrow)
+            setPos = CENTER_POS;
+
+        if(rightArrow)
+            setPos = BASKET_POS;
+
+        if(chamberButton)
+            setPos = CHAMBER_POS;
+
+        if(specimenButton)
+            setPos = SPEC_POS;
+
+        if(leftArrow || rightArrow || chamberButton || specimenButton){
+            isHasReached = false;
+            deltaPos = (setPos - this.getShoulder_servo_l().getPosition()) / 125;
+        }
 
 
-        }
-        if(rightArrow){
-            if(slowShoulder(BASKET_POS))
-                return;
-        }
-        if(chamberButton){
-            if(slowShoulder(CHAMBER_POS))
-                return;
-
-        }
-        if(specimenButton){
-            if(slowShoulder(SPEC_POS))
-                return;
-        }
+        //slowShoulder(setPos);
 
     }
 

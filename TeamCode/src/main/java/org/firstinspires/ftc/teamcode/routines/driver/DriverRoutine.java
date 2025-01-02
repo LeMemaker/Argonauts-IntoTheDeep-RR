@@ -39,7 +39,7 @@ public class DriverRoutine extends Routine {
 			clawSystem.shoulderOnTick(gamepad1.b, gamepad1.x);
 			telemetry.addData("Shoulder Position", clawSystem.getShoulder_servo_l().getPosition());
 
-			clawSystem.presetPosition(gamepad1.dpad_left, gamepad1.dpad_right, gamepad1.a, gamepad1.y);
+
 
 			clawSystem.extensionOnTick(gamepad1.left_bumper);
 			telemetry.addData("Extension", clawSystem.getExt_servo().getPosition());
@@ -50,6 +50,15 @@ public class DriverRoutine extends Routine {
 			telemetry.addData("left_stick_y", gamepad1.left_stick_x);
 			telemetry.addData("right_stick_x", gamepad1.right_stick_x);
 			telemetry.addData("Has Reached Position", clawSystem.isHasReached);
+
+			clawSystem.presetPosition(gamepad1.dpad_left, gamepad1.dpad_right, gamepad1.a, gamepad1.y);
+			if(!clawSystem.isHasReached) {
+				if (Math.abs(clawSystem.getShoulder_servo_l().getPosition() - clawSystem.getSetPos()) >= 0.005) {
+					clawSystem.setShoulderPos(clawSystem.getShoulder_servo_l().getPosition() + clawSystem.getDeltaPos());
+				} else {
+					clawSystem.isHasReached = true;
+				}
+			}
 
 
 
