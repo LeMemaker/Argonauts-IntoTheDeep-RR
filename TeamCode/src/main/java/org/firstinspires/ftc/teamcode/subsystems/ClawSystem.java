@@ -17,6 +17,8 @@ public class ClawSystem extends Subsystem
 
     private Servo ext_servo;
 
+    public boolean isHasReached;
+
 
     /*public Servo getShoulder_servo() {
         return shoulder_servo;
@@ -46,7 +48,7 @@ public class ClawSystem extends Subsystem
 
     final double SPEC_POS = 0.775;
 
-    final double CHAMBER_POS = 0.5;
+    final double CHAMBER_POS = 0.3;
 
     private boolean openChanged = false;
 
@@ -59,12 +61,15 @@ public class ClawSystem extends Subsystem
         this.shoulder_servo_l.setPosition(pos);
         this.shoulder_servo_r.setPosition(pos);
     }
-    public void slowShoulder(double pos){
+    public boolean slowShoulder(double pos){
+        isHasReached = false;
         double cur = this.shoulder_servo_l.getPosition();
-        for(double i=cur; i<=pos; i+=(pos-cur)/1000.0)
+        for(double i=cur; Math.abs(i-pos)>=0.005; i+=(pos-cur)/500.0)
         {
             setShoulderPos(i);
+            isHasReached = true;
         }
+        return isHasReached;
 
     }
 
@@ -117,18 +122,23 @@ public class ClawSystem extends Subsystem
 
     public void presetPosition(boolean leftArrow, boolean rightArrow, boolean chamberButton, boolean specimenButton){
         if(leftArrow){
-            slowShoulder(CENTER_POS);
+            if(slowShoulder(CENTER_POS))
+                return;
+
 
         }
         if(rightArrow){
-            slowShoulder(BASKET_POS);
+            if(slowShoulder(BASKET_POS))
+                return;
         }
         if(chamberButton){
-            slowShoulder(CHAMBER_POS);
+            if(slowShoulder(CHAMBER_POS))
+                return;
 
         }
         if(specimenButton){
-            slowShoulder(SPEC_POS);
+            if(slowShoulder(SPEC_POS))
+                return;
         }
 
     }

@@ -49,6 +49,7 @@ public class DriverRoutine extends Routine {
 			telemetry.addData("left_stick_x", gamepad1.left_stick_x);
 			telemetry.addData("left_stick_y", gamepad1.left_stick_x);
 			telemetry.addData("right_stick_x", gamepad1.right_stick_x);
+			telemetry.addData("Has Reached Position", clawSystem.isHasReached);
 
 
 
