@@ -35,8 +35,8 @@ public class ClawSystem extends Subsystem
     private double setPos;
 
     private double deltaPos;
-    final double OPEN = 0.30;
-    final double CLOSE = 0.7;// TEST THEM OUT AFTERNOON
+    final double OPEN = 0.55;
+    final double CLOSE = 0.75;// TEST THEM OUT AFTERNOON
 
     final double EXTENDED = 0.25;
 
