@@ -45,8 +45,8 @@ public class ClawSystem extends Subsystem
     final double FRONT_LIMIT = 0.06;
     final double BACK_LIMIT = 0.85;
 
-    final double CENTER_POS = 0.35;// Test these 4 tomorrow
-    final double BASKET_POS = 0.65;
+    final double SAMPLE_POS = 0.0544;// Test these 4 tomorrow
+    final double EXT_SAMPLE_POS = 0.0833;
 
     final double SPEC_POS = 0.775;
 
@@ -136,10 +136,10 @@ public class ClawSystem extends Subsystem
     public void presetPosition(boolean leftArrow, boolean rightArrow, boolean chamberButton, boolean specimenButton){
 
         if(leftArrow)
-            setPos = CENTER_POS;
+            setPos = SAMPLE_POS;
 
         if(rightArrow)
-            setPos = BASKET_POS;
+            setPos = EXT_SAMPLE_POS;
 
         if(chamberButton)
             setPos = CHAMBER_POS;
@@ -149,7 +149,7 @@ public class ClawSystem extends Subsystem
 
         if(leftArrow || rightArrow || chamberButton || specimenButton){
             isHasReached = false;
-            deltaPos = (setPos - this.getShoulder_servo_l().getPosition()) / 125;
+            deltaPos = (setPos - this.getShoulder_servo_l().getPosition()) / Math.abs((setPos - this.getShoulder_servo_l().getPosition())) * 0.005;
         }
 
 
