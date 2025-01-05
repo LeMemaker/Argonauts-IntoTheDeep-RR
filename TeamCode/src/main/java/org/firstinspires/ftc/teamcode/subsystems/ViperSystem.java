@@ -11,6 +11,8 @@ public class ViperSystem extends Subsystem{
 
     private double lowerBound = 0.0;
     private double upperBound = 0.0;
+
+    private boolean holdingDown = false;
     public DcMotor getViper_motor_l() {
         return viper_motor_l;
     }
@@ -21,7 +23,9 @@ public class ViperSystem extends Subsystem{
 
     public void moveOnTick(boolean isUp, boolean isDown){
         double pow = 1;
-
+        if(holdingDown){
+           return;
+        }
         if(isUp && !isDown){
             getViper_motor_l().setPower(pow);
             getViper_motor_r().setPower(pow);
@@ -36,6 +40,24 @@ public class ViperSystem extends Subsystem{
             getViper_motor_r().setPower(0);
         }
 
+
+    }
+
+    public void holdDown(boolean holdUp){
+        if(holdUp){
+            if(!holdingDown){
+                holdingDown = true;
+                getViper_motor_l().setPower(-1.0);
+                getViper_motor_r().setPower(-1.0);
+            }
+            else{
+                holdingDown = false;
+                getViper_motor_l().setPower(0.0);
+                getViper_motor_r().setPower(0.0);
+            }
+
+
+        }
 
     }
 

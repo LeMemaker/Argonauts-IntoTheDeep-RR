@@ -17,17 +17,28 @@ public class DriverRoutine extends Routine {
 	@Override
 	public void onInit() {
 		super.onInit();
-		viperSystem = new ViperSystem(this);
-		clawSystem = new ClawSystem(this);
-		driveSystem = new DriveSystem(this);
+//		viperSystem = new ViperSystem(this);
+//		clawSystem = new ClawSystem(this);
+//		driveSystem = new DriveSystem(this);
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
+		viperSystem = new ViperSystem(this);
+		clawSystem = new ClawSystem(this);
+		driveSystem = new DriveSystem(this);
+		try
+		{
+			Thread.sleep(1000);
+
+		}catch(InterruptedException e){
+
+		}
 		while(opModeIsActive()){
 			viperSystem.moveOnTick(gamepad1.dpad_up, gamepad1.dpad_down);
 
+			viperSystem.holdDown(gamepad1.left_trigger == 1.0);
 
 
 			telemetry.addData("Left Viper Motor", viperSystem.getViper_motor_l().getCurrentPosition());

@@ -42,6 +42,8 @@ public class DriveSystem extends Subsystem
         getDrive_motor_br().setPower((y + x - rx));
     }
 
+
+
     public void driveOnTickVector(double x, double y, double rx){
         x = -x;
         rx = -rx;
