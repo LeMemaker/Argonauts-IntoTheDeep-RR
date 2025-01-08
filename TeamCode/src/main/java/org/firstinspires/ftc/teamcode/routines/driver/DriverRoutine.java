@@ -50,6 +50,8 @@ public class DriverRoutine extends Routine {
 			clawSystem.shoulderOnTick(gamepad1.b, gamepad1.x);
 			telemetry.addData("Shoulder Position", clawSystem.getShoulder_servo_l().getPosition());
 
+			telemetry.addData("Shoulder ACTUAL Position", clawSystem.getActualPos());
+
 
 
 			clawSystem.extensionOnTick(gamepad1.left_bumper);

@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 
+import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -12,6 +13,10 @@ public class ClawSystem extends Subsystem
     private Servo shoulder_servo_l;
 
     private Servo shoulder_servo_r;
+
+    private AnalogInput shoulder_enc_r;
+
+    private AnalogInput shoulder_enc_l;
 
     private Servo claw_servo;
 
@@ -61,6 +66,18 @@ public class ClawSystem extends Subsystem
 
     public double getSetPos(){
         return setPos;
+    }
+
+    public double getActualPosL(){
+        return 360 - ((shoulder_enc_l.getVoltage() / 3.3 * 360) - 26.3 + 90);
+    }
+
+    public double getActualPosR(){
+        return (shoulder_enc_r.getVoltage() / 3.3 * 360);
+    }
+
+    public double getActualPos(){
+        return getActualPosL();
     }
 
     public double getDeltaPos(){
@@ -157,6 +174,8 @@ public class ClawSystem extends Subsystem
 
     }
 
+
+
     public void extensionOnTick(boolean x){
         if(x){
             ext_servo.setPosition(EXTENDED);
@@ -175,10 +194,14 @@ public class ClawSystem extends Subsystem
         claw_servo = routine.hardwareMap.get(Servo.class, "claw_servo");
         shoulder_servo_r = routine.hardwareMap.get(Servo.class, "shoulder_servo_r");
         shoulder_servo_l = routine.hardwareMap.get(Servo.class, "shoulder_servo_l");
-        ext_servo = routine.hardwareMap.get(Servo.class, "ext_servo");
-        shoulder_servo_l.setPosition(FRONT_LIMIT);
-        shoulder_servo_r.setPosition(FRONT_LIMIT);
 
+        shoulder_enc_r = routine.hardwareMap.get(AnalogInput.class, "shoulder_enc_r");
+        shoulder_enc_l = routine.hardwareMap.get(AnalogInput.class, "shoulder_enc_l");
+        ext_servo = routine.hardwareMap.get(Servo.class, "ext_servo");
+        //shoulder_servo_l.setPosition(FRONT_LIMIT);
+        //shoulder_servo_r.setPosition(FRONT_LIMIT);
+
+//206.3 at 180
 
         this.toggleClaw(true);
 
