@@ -10,9 +10,24 @@ import org.java_websocket.handshake.ServerHandshakeBuilder;
 
 public class ClawSystem extends Subsystem
 {
+
+    //weight of misumi: 111.6 g
+    //weight of axon: 21 g * 2
+    //weight of 2 claws: 13.45 + 13.6 g
+    //weight of mount 4.75 g
+    //length of misumi: 16.5 in, com = 8.25 (assuming uniform mass) = 0.23 m
+    //servo + claws mounted ~16 in away =  0.406 m
+    //weight of servo claw complex = 42 + 13.45 + 13.6 + 4.75 = 73.8 g
+    // torque needed: 0.5464 cos theta
+
+    //We should test using cont rotation, and adjusting power levels. We can tune by trying to hold at 0 position at seeing what power value allows the servo to hold, aka seeing what power = 0.5646 N*m
     private Servo shoulder_servo_l;
 
+    private CRServo shoulder_cont_l;
+
     private Servo shoulder_servo_r;
+
+    private CRServo shoulder_cont_r;
 
     private AnalogInput shoulder_enc_r;
 
@@ -88,6 +103,12 @@ public class ClawSystem extends Subsystem
         this.shoulder_servo_l.setPosition(pos);
         this.shoulder_servo_r.setPosition(pos);
     }
+
+    public void setShoulderPow(double pow){
+        this.shoulder_cont_l.setPower(pow);
+        this.shoulder_cont_r.setPower(pow);
+    }
+
 
 
     public void slowShoulder(double pos){
@@ -192,8 +213,11 @@ public class ClawSystem extends Subsystem
     public ClawSystem(Routine routine) {
         super(routine);
         claw_servo = routine.hardwareMap.get(Servo.class, "claw_servo");
-        shoulder_servo_r = routine.hardwareMap.get(Servo.class, "shoulder_servo_r");
-        shoulder_servo_l = routine.hardwareMap.get(Servo.class, "shoulder_servo_l");
+//        shoulder_servo_r = routine.hardwareMap.get(Servo.class, "shoulder_servo_r");
+//        shoulder_servo_l = routine.hardwareMap.get(Servo.class, "shoulder_servo_l");
+
+        shoulder_cont_r = routine.hardwareMap.get(CRServo.class, "shoulder_cont_r");
+        shoulder_cont_l = routine.hardwareMap.get(CRServo.class, "shoulder_cont_l");
 
         shoulder_enc_r = routine.hardwareMap.get(AnalogInput.class, "shoulder_enc_r");
         shoulder_enc_l = routine.hardwareMap.get(AnalogInput.class, "shoulder_enc_l");
