@@ -20,21 +20,27 @@ public class ClawTestRoutine extends Routine {
     public void onStart() {
         double pow = 0.0;
         while(opModeIsActive()){
-            clawSystem.toggleClaw(gamepad1.b);
+            //clawSystem.toggleClaw(gamepad1.b);
             telemetry.addData("Servo Claw", clawSystem.getClaw_servo().getPosition());
 
             double actualPos = clawSystem.getActualPos();
-
-            clawSystem.setShoulderPow(pow);
-
-            if(actualPos < 0.0){
-                pow += 0.001;
+            if(gamepad1.a){
+                clawSystem.holdServoPos();
             }
-            if(actualPos > 0.0){
-                pow -= 0.001;
+            if(gamepad1.b){
+                clawSystem.setShoulderPow(0.0);
             }
+
+//            if(gamepad1.a){
+//                pow += 0.0001;
+//            }
+//            if(gamepad1.b){
+//                pow -= 0.0001;
+//            }
+
+            //clawSystem.setShoulderPow(pow);
             telemetry.addData("Shoulder ACTUAL Position", clawSystem.getActualPos());
-            telemetry.addData("Power", pow);
+            telemetry.addData("Power", clawSystem.getPower());
             telemetry.update();
         }
 

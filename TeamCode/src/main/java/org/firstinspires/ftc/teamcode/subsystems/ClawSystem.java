@@ -20,6 +20,8 @@ public class ClawSystem extends Subsystem
     //weight of servo claw complex = 42 + 13.45 + 13.6 + 4.75 = 73.8 g
     // torque needed: 0.5464 cos theta
 
+    //power value: 0.13
+
     //We should test using cont rotation, and adjusting power levels. We can tune by trying to hold at 0 position at seeing what power value allows the servo to hold, aka seeing what power = 0.5646 N*m
     private Servo shoulder_servo_l;
 
@@ -35,9 +37,10 @@ public class ClawSystem extends Subsystem
 
     private Servo claw_servo;
 
-    private Servo ext_servo;
-
     public boolean isHasReached;
+
+    final double torqueConst = 0.13;
+
 
 
     /*public Servo getShoulder_servo() {
@@ -48,9 +51,6 @@ public class ClawSystem extends Subsystem
     public Servo getShoulder_servo_r() { return shoulder_servo_r; }
     public Servo getClaw_servo() {
         return claw_servo;
-    }
-    public Servo getExt_servo(){
-        return ext_servo;
     }
     private double setPos;
 
@@ -131,6 +131,18 @@ public class ClawSystem extends Subsystem
         this.setClawPos(this.CLOSE);
     }
 
+    public double powerToTorque(double pow){
+        return pow * 0.5464 / torqueConst;
+    }
+
+    public void holdServoPos(){
+        this.setShoulderPow(torqueConst*Math.cos(this.getActualPosL()));
+    }
+
+    public double getPower(){
+        return this.shoulder_cont_l.getPower();
+    }
+
     public void toggleClaw(boolean toggle){
 
         if(toggle && !openChanged){
@@ -197,14 +209,6 @@ public class ClawSystem extends Subsystem
 
 
 
-    public void extensionOnTick(boolean x){
-        if(x){
-            ext_servo.setPosition(EXTENDED);
-        }
-        else{
-            ext_servo.setPosition(RETRACTED);
-        }
-    }
 
 
 
@@ -213,17 +217,16 @@ public class ClawSystem extends Subsystem
     public ClawSystem(Routine routine) {
         super(routine);
         claw_servo = routine.hardwareMap.get(Servo.class, "claw_servo");
-//        shoulder_servo_r = routine.hardwareMap.get(Servo.class, "shoulder_servo_r");
-//        shoulder_servo_l = routine.hardwareMap.get(Servo.class, "shoulder_servo_l");
+        shoulder_servo_r = routine.hardwareMap.get(Servo.class, "shoulder_servo_r");
+        shoulder_servo_l = routine.hardwareMap.get(Servo.class, "shoulder_servo_l");
 
-        shoulder_cont_r = routine.hardwareMap.get(CRServo.class, "shoulder_cont_r");
-        shoulder_cont_l = routine.hardwareMap.get(CRServo.class, "shoulder_cont_l");
+//        shoulder_cont_r = routine.hardwareMap.get(CRServo.class, "shoulder_cont_r");
+//        shoulder_cont_l = routine.hardwareMap.get(CRServo.class, "shoulder_cont_l");
 
         shoulder_enc_r = routine.hardwareMap.get(AnalogInput.class, "shoulder_enc_r");
         shoulder_enc_l = routine.hardwareMap.get(AnalogInput.class, "shoulder_enc_l");
-        ext_servo = routine.hardwareMap.get(Servo.class, "ext_servo");
-        //shoulder_servo_l.setPosition(FRONT_LIMIT);
-        //shoulder_servo_r.setPosition(FRONT_LIMIT);
+        shoulder_servo_l.setPosition(FRONT_LIMIT);
+        shoulder_servo_r.setPosition(FRONT_LIMIT);
 
 //206.3 at 180
 
