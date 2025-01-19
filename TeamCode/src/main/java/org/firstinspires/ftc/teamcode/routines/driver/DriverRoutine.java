@@ -61,6 +61,8 @@ public class DriverRoutine extends Routine {
 			telemetry.addData("right_stick_x", gamepad1.right_stick_x);
 			telemetry.addData("Has Reached Position", clawSystem.isHasReached);
 
+
+
 			clawSystem.presetPosition(gamepad1.dpad_left, gamepad1.dpad_right, gamepad1.y, gamepad1.a);
 			if(!clawSystem.isHasReached) {
 				if (Math.abs(clawSystem.getShoulder_servo_l().getPosition() - clawSystem.getSetPos()) >= 0.005) {

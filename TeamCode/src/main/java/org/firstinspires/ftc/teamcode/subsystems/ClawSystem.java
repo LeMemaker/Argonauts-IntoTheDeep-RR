@@ -75,6 +75,14 @@ public class ClawSystem extends Subsystem
     private boolean openChanged = false;
 
     private  boolean isOpen = true;
+
+    private double currentShoulderPos = 0.0;
+
+    private double pastShoulderPos = 0.0;
+
+    private double currentTime = 0.0;
+
+    private double pastTime = 0.0;
     public void setClawPos(double pos){
         this.claw_servo.setPosition(pos);
     }
@@ -183,6 +191,19 @@ public class ClawSystem extends Subsystem
 
     }
 
+    public double getShoulderVelocity(double runTime){
+        pastTime = currentTime;
+        currentTime = runTime;
+
+        pastShoulderPos = currentShoulderPos;
+        currentShoulderPos = this.getActualPosL();
+
+        double deltaTime = currentTime - runTime;
+        double deltaPos = currentShoulderPos - pastShoulderPos;
+
+        return deltaPos/deltaTime;
+    }
+
     public void presetPosition(boolean leftArrow, boolean rightArrow, boolean chamberButton, boolean specimenButton){
 
         if(leftArrow)
@@ -227,6 +248,8 @@ public class ClawSystem extends Subsystem
         shoulder_enc_l = routine.hardwareMap.get(AnalogInput.class, "shoulder_enc_l");
         shoulder_servo_l.setPosition(FRONT_LIMIT);
         shoulder_servo_r.setPosition(FRONT_LIMIT);
+
+        currentShoulderPos = this.getActualPosL();
 
 //206.3 at 180
 
