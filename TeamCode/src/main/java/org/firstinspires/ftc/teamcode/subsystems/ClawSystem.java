@@ -80,9 +80,17 @@ public class ClawSystem extends Subsystem
 
     private double pastShoulderPos = 0.0;
 
+    private double shoulderAccel = 0.0;
+
+
     private double currentTime = 0.0;
 
     private double pastTime = 0.0;
+
+    private double shoulderVel = 0.0;
+
+    private double pastShoulderVel = 0.0;
+    private double actualShoulderVel = 0.0;
     public void setClawPos(double pos){
         this.claw_servo.setPosition(pos);
     }
@@ -147,6 +155,14 @@ public class ClawSystem extends Subsystem
         this.setShoulderPow(torqueConst*Math.cos(this.getActualPosL()));
     }
 
+    public void setShoulderVel(double _shoulderVel){
+        this.shoulderVel = _shoulderVel;
+    }
+
+    public double getShoulderVel(){
+        return shoulderVel;
+    }
+
     public double getPower(){
         return this.shoulder_cont_l.getPower();
     }
@@ -191,7 +207,7 @@ public class ClawSystem extends Subsystem
 
     }
 
-    public double getShoulderVelocity(double runTime){
+    public double getActualShoulderVelocity(double runTime){
         pastTime = currentTime;
         currentTime = runTime;
 
@@ -201,9 +217,25 @@ public class ClawSystem extends Subsystem
         double deltaTime = currentTime - runTime;
         double deltaPos = currentShoulderPos - pastShoulderPos;
 
-        return deltaPos/deltaTime;
+        pastShoulderVel = actualShoulderVel;
+
+        actualShoulderVel = deltaPos/deltaTime;
+        getShoulderAcceleration(deltaTime);
+        return this.actualShoulderVel;
     }
 
+    private double getShoulderAcceleration(double deltaTime){
+        double deltaVel = actualShoulderVel - pastShoulderVel;
+
+        shoulderAccel = deltaVel/deltaTime;
+        return shoulderAccel;
+    }
+
+    public void holdVelocity(){
+        double shoulderError = this.actualShoulderVel - this.shoulderVel;
+
+
+    }
     public void presetPosition(boolean leftArrow, boolean rightArrow, boolean chamberButton, boolean specimenButton){
 
         if(leftArrow)
