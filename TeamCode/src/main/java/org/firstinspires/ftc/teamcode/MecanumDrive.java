@@ -84,7 +84,7 @@ public final class MecanumDrive {
         // path controller gains
         public double axialGain = 0.0;
         public double lateralGain = 0.0;
-        public double headingGain = 15.76; // shared with turn
+        public double headingGain = 0.0; // shared with turn
 
         public double axialVelGain = 0.0;
         public double lateralVelGain = 0.0;
@@ -219,8 +219,8 @@ public final class MecanumDrive {
         //   see https://ftc-docs.firstinspires.org/en/latest/hardware_and_software_configuration/configuring/index.html
         leftFront = hardwareMap.get(DcMotorEx.class, "drive_motor_fl");
         leftBack = hardwareMap.get(DcMotorEx.class, "drive_motor_bl");
-        rightBack = hardwareMap.get(DcMotorEx.class, "drive_motor_fr");
-        rightFront = hardwareMap.get(DcMotorEx.class, "drive_motor_br");
+        rightBack = hardwareMap.get(DcMotorEx.class, "drive_motor_br");
+        rightFront = hardwareMap.get(DcMotorEx.class, "drive_motor_fr");
 
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
