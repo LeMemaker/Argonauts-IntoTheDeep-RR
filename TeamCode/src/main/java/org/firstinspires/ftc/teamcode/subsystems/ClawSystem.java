@@ -62,7 +62,7 @@ public class ClawSystem extends Subsystem
 
     final double RETRACTED = 0.65;
 
-    final double FRONT_LIMIT = 0.06;
+    final double FRONT_LIMIT = 0.01;
     final double BACK_LIMIT = 0.85;
 
     final double SAMPLE_POS = 0.0544;// Test these 4 tomorrow
@@ -278,8 +278,8 @@ public class ClawSystem extends Subsystem
 
         shoulder_enc_r = routine.hardwareMap.get(AnalogInput.class, "shoulder_enc_r");
         shoulder_enc_l = routine.hardwareMap.get(AnalogInput.class, "shoulder_enc_l");
-        shoulder_servo_l.setPosition(FRONT_LIMIT);
-        shoulder_servo_r.setPosition(FRONT_LIMIT);
+        //shoulder_servo_l.setPosition(FRONT_LIMIT);
+        //shoulder_servo_r.setPosition(FRONT_LIMIT);
 
         currentShoulderPos = this.getActualPosL();
 

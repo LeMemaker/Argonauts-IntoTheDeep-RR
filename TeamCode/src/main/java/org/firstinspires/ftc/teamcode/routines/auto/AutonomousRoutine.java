@@ -12,7 +12,11 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 import org.firstinspires.ftc.teamcode.TankDrive;
 
 import org.firstinspires.ftc.teamcode.routines.Routine;
-@Disabled
+import org.firstinspires.ftc.teamcode.subsystems.ClawSystem;
+import org.firstinspires.ftc.teamcode.subsystems.DriveSystem;
+import org.firstinspires.ftc.teamcode.subsystems.ViperSystem;
+
+
 @Autonomous(name = "Autonomous")
 public class AutonomousRoutine extends Routine {
 	public ViperSystem viperSystem;
@@ -25,7 +29,7 @@ public class AutonomousRoutine extends Routine {
 		clawSystem = new ClawSystem(this);
 		driveSystem = new DriveSystem(this);
 
-		clawSystem.set
+		//clawSystem.setShoulderPos(0.01);
 	}
 
 	@Override
