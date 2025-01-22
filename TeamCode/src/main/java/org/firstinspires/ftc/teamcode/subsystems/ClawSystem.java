@@ -285,7 +285,7 @@ public class ClawSystem extends Subsystem
 
 //206.3 at 180
 
-        this.toggleClaw(true);
+
 
     }
 }

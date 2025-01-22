@@ -28,13 +28,33 @@ public class AutonomousRoutine extends Routine {
 		viperSystem = new ViperSystem(this);
 		clawSystem = new ClawSystem(this);
 		driveSystem = new DriveSystem(this);
-
-		//clawSystem.setShoulderPos(0.01);
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
+		clawSystem.setShoulderPos(0.025);
+
+		clawSystem.toggleClaw(true);
+		try{
+			Thread.sleep(1000);
+		}
+		catch (InterruptedException e){
+
+		}
+		clawSystem.setShoulderPos(0.255);
+
+		Pose2d beginPose = new Pose2d(0, 0, 0);
+		MecanumDrive drive = new MecanumDrive(hardwareMap, beginPose);
+
+		waitForStart();
+
+		Actions.runBlocking(
+				drive.actionBuilder(beginPose)
+						.splineTo(new Vector2d(27, 8), 0)
+						.build());
+
+
 
 	}
 
