@@ -55,12 +55,6 @@ public class AutonomousRoutine extends Routine {
 						.build());
 
 
-		clawSystem.openClaw();
-
-		Actions.runBlocking(
-				drive.actionBuilder(beginPose)
-						.splineTo(new Vector2d(-5,0),0)
-						.build());
 
 	}
 
