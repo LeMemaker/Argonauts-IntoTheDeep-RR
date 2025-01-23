@@ -69,21 +69,28 @@ public class AutonomousRoutine extends Routine {
 						.lineToXConstantHeading(21)
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.0554))//test position
 						.strafeTo(new Vector2d(21, 49))//needs testing, lining up with first specimen
+						.waitSeconds(1)
 						.stopAndAdd(new toggleClaw(clawSystem, false))
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.8))//hovering over the zone
-						.stopAndAdd(new toggleClaw(clawSystem, false))
+						.waitSeconds(1)
+						.stopAndAdd(new toggleClaw(clawSystem, true))
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.0554))//test position
 						.strafeTo(new Vector2d(21, 59))//needs testing, lining up with second specimen
+						.waitSeconds(1)
 						.stopAndAdd(new toggleClaw(clawSystem, false))
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.8))//hovering over the zone
-						.stopAndAdd(new toggleClaw(clawSystem, false))
+						.waitSeconds(1)
+						.stopAndAdd(new toggleClaw(clawSystem, true))
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.0554))//test position
 						.turn(-Math.PI/6)//trying to get third sample
+						.waitSeconds(1)
 						.stopAndAdd(new toggleClaw(clawSystem, false))
 						.turn(Math.PI/6)//correcting back from third sample
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.8))//hovering over the zone
-						.stopAndAdd(new toggleClaw(clawSystem, false))
-						.stopAndAdd(new setShoulderPos(clawSystem, 0.0554))//test position
+						.waitSeconds(1)
+						.stopAndAdd(new toggleClaw(clawSystem, true))
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.775))//test position
+						.strafeTo(new Vector2d(21, 49))
 						.build()
 		);
 	}
