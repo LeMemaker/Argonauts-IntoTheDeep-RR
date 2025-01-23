@@ -58,11 +58,6 @@ public class AutonomousRoutine extends Routine {
 	public void onStart() {
 		super.onStart();
 
-
-		TrajectoryActionBuilder toSpec1 = drive.actionBuilder(beginPose)
-				.splineTo(new Vector2d(27, 8), 0);
-
-
 		Actions.runBlocking(
 				drive.actionBuilder(beginPose)
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.025))
@@ -91,12 +86,6 @@ public class AutonomousRoutine extends Routine {
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.0554))//test position
 						.build()
 		);
-
-
-
-
-
-
 	}
 
 	@Override
