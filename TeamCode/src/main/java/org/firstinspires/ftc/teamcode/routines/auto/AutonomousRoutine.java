@@ -38,6 +38,8 @@ public class AutonomousRoutine extends Routine {
 	public MecanumDrive drive;
 
 	private Action spec1;
+
+
 	@Override
 	public void onInit() {
 		super.onInit();
@@ -56,31 +58,27 @@ public class AutonomousRoutine extends Routine {
 	public void onStart() {
 		super.onStart();
 
+
 		TrajectoryActionBuilder toSpec1 = drive.actionBuilder(beginPose)
 				.splineTo(new Vector2d(27, 8), 0);
 
 
 		Actions.runBlocking(
-				new SequentialAction(
-				new setShoulderPos(clawSystem, 0.025),
-				new toggleClaw(clawSystem, true),
-				new SleepAction(1),
-				new setShoulderPos(clawSystem, 0.255),
-				new ParallelAction(
-						drive.followTrajectory()
-				)
-
-		));
-
-
-		Actions.runBlocking(
-
-		clawSystem.closeClaw();
-
-		Actions.runBlocking(
 				drive.actionBuilder(beginPose)
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.025))
+						.stopAndAdd(new toggleClaw(clawSystem, false))
+						.waitSeconds(1)
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.255))
+						.splineTo(new Vector2d(27, 8), 0)
+						.stopAndAdd(new toggleClaw(clawSystem, true))
 						.splineTo(new Vector2d(-5,0),0)
-						.build());
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.0554))//test position
+						.strafeTo(new Vector2d(0, 0))//needs testing, lining up with 
+						.build()
+		);
+
+
+
 
 
 
@@ -127,6 +125,8 @@ public class AutonomousRoutine extends Routine {
 			return false;
 		}
 	}
+
+
 }
 
 
