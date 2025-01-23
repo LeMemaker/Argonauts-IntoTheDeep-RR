@@ -71,9 +71,9 @@ public class AutonomousRoutine extends Routine {
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.255))
 						.splineTo(new Vector2d(27, 8), 0)
 						.stopAndAdd(new toggleClaw(clawSystem, true))
-						.splineTo(new Vector2d(-5,0),0)
+						.splineTo(new Vector2d(21,8),0)
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.0554))//test position
-						.strafeTo(new Vector2d(0, 0))//needs testing, lining up with 
+						.strafeTo(new Vector2d(0, 0))//needs testing, lining up with
 						.build()
 		);
 
