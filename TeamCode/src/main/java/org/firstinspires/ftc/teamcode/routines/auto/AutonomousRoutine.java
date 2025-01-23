@@ -55,7 +55,7 @@ public class AutonomousRoutine extends Routine {
 						.build());
 
 
-		clawSystem.openClaw();
+		clawSystem.toggleClaw(false);
 
 		Actions.runBlocking(
 				drive.actionBuilder(beginPose)
