@@ -1,5 +1,15 @@
 package org.firstinspires.ftc.teamcode.routines.auto;
 
+import androidx.annotation.NonNull;
+
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.acmerobotics.roadrunner.Action;
+import com.acmerobotics.roadrunner.ParallelAction;
+import com.acmerobotics.roadrunner.SequentialAction;
+import com.acmerobotics.roadrunner.SleepAction;
+import com.acmerobotics.roadrunner.Trajectory;
+import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
+import com.acmerobotics.roadrunner.TrajectoryBuilder;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
@@ -22,38 +32,50 @@ public class AutonomousRoutine extends Routine {
 	public ViperSystem viperSystem;
 	public ClawSystem clawSystem;
 	public DriveSystem driveSystem;
+
+	public Pose2d beginPose;
+
+	public MecanumDrive drive;
+
+	private Action spec1;
 	@Override
 	public void onInit() {
 		super.onInit();
 		viperSystem = new ViperSystem(this);
 		clawSystem = new ClawSystem(this);
 		driveSystem = new DriveSystem(this);
+
+		beginPose = new Pose2d(0, 0, 0);
+		drive = new MecanumDrive(hardwareMap, beginPose);
+
+
+
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
-		clawSystem.setShoulderPos(0.025);
 
-		clawSystem.toggleClaw(true);
-		try{
-			Thread.sleep(1000);
-		}
-		catch (InterruptedException e){
+		TrajectoryActionBuilder toSpec1 = drive.actionBuilder(beginPose)
+				.splineTo(new Vector2d(27, 8), 0);
 
-		}
-		clawSystem.setShoulderPos(0.255);
-
-		Pose2d beginPose = new Pose2d(0, 0, 0);
-		MecanumDrive drive = new MecanumDrive(hardwareMap, beginPose);
-
-		waitForStart();
 
 		Actions.runBlocking(
-				drive.actionBuilder(beginPose)
-						.splineTo(new Vector2d(27, 8), 0)
-						.build());
-		clawSystem.toggleClaw(false);
+				new SequentialAction(
+				new setShoulderPos(clawSystem, 0.025),
+				new toggleClaw(clawSystem, true),
+				new SleepAction(1),
+				new setShoulderPos(clawSystem, 0.255),
+				new ParallelAction(
+						drive.followTrajectory()
+				)
+
+		));
+
+
+		Actions.runBlocking(
+
+		clawSystem.closeClaw();
 
 		Actions.runBlocking(
 				drive.actionBuilder(beginPose)
@@ -68,4 +90,43 @@ public class AutonomousRoutine extends Routine {
 	public void onExit() {
 		super.onExit();
 	}
+
+	public class setShoulderPos implements Action {
+		ClawSystem clawSystem;
+		double targetPos;
+
+		public setShoulderPos(ClawSystem system, double pos){
+			this.clawSystem = system;
+			this.targetPos = pos;
+		}
+
+		@Override
+		public boolean run(@NonNull TelemetryPacket telemetryPacket){
+			clawSystem.setShoulderPos(this.targetPos);
+			return false;
+		}
+	}
+
+	public class toggleClaw implements Action {
+		ClawSystem clawSystem;
+		boolean open;
+
+		public toggleClaw(ClawSystem system, boolean open) {
+			this.clawSystem = system;
+			this.open = open;
+		}
+
+		@Override
+		public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+			if(open){
+				clawSystem.openClaw();
+			}
+			else {
+				clawSystem.closeClaw();
+			}
+			return false;
+		}
+	}
 }
+
+
