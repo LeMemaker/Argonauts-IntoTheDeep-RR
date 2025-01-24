@@ -26,6 +26,8 @@ import org.firstinspires.ftc.teamcode.subsystems.ClawSystem;
 import org.firstinspires.ftc.teamcode.subsystems.DriveSystem;
 import org.firstinspires.ftc.teamcode.subsystems.ViperSystem;
 
+import java.util.Vector;
+
 
 @Autonomous(name = "Autonomous")
 public class AutonomousRoutine extends Routine {
@@ -60,37 +62,46 @@ public class AutonomousRoutine extends Routine {
 
 		Actions.runBlocking(
 				drive.actionBuilder(beginPose)
-						.stopAndAdd(new setShoulderPos(clawSystem, 0.025))
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.0253))
 						.stopAndAdd(new toggleClaw(clawSystem, false))
 						.waitSeconds(1)
-						.stopAndAdd(new setShoulderPos(clawSystem, 0.255))
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.257))
 						.splineTo(new Vector2d(27, 8), 0)
 						.stopAndAdd(new toggleClaw(clawSystem, true))
-						.lineToXConstantHeading(21)
-						.stopAndAdd(new setShoulderPos(clawSystem, 0.0554))//test position
-						.strafeTo(new Vector2d(21, 49))//needs testing, lining up with first specimen
+						.lineToXConstantHeading(18)
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.05))//test position
+						.strafeTo(new Vector2d(24, -36))//needs testing, lining up with first specimen
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.02))//test position
 						.waitSeconds(1)
 						.stopAndAdd(new toggleClaw(clawSystem, false))
+						.waitSeconds(0.5)
+						.lineToXConstantHeading(18)
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.8))//hovering over the zone
-						.waitSeconds(1)
+						.waitSeconds(2)
 						.stopAndAdd(new toggleClaw(clawSystem, true))
-						.stopAndAdd(new setShoulderPos(clawSystem, 0.0554))//test position
-						.strafeTo(new Vector2d(21, 59))//needs testing, lining up with second specimen
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.02))//test position
+						.strafeTo(new Vector2d(24, -46))//needs testing, lining up with second specimen
 						.waitSeconds(1)
 						.stopAndAdd(new toggleClaw(clawSystem, false))
+						.waitSeconds(0.5)
+						.lineToXConstantHeading(18)
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.8))//hovering over the zone
-						.waitSeconds(1)
+						.waitSeconds(2)
 						.stopAndAdd(new toggleClaw(clawSystem, true))
-						.stopAndAdd(new setShoulderPos(clawSystem, 0.0554))//test position
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.05))//test position
+						.waitSeconds(1)
 						.turn(-Math.PI/6)//trying to get third sample
-						.waitSeconds(1)
+						.splineTo(new Vector2d(25, -47),-Math.PI/6)
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.02))//test position
 						.stopAndAdd(new toggleClaw(clawSystem, false))
+						.waitSeconds(0.5)
 						.turn(Math.PI/6)//correcting back from third sample
+						.lineToXConstantHeading(18)
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.8))//hovering over the zone
-						.waitSeconds(1)
+						.waitSeconds(2)
 						.stopAndAdd(new toggleClaw(clawSystem, true))
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.775))//test position
-						.strafeTo(new Vector2d(21, 49))
+						.strafeTo(new Vector2d(10, -36))
 						.build()
 		);
 	}
