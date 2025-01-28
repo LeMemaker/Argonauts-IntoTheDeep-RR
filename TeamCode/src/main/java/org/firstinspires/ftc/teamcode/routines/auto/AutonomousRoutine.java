@@ -93,29 +93,21 @@ public class AutonomousRoutine extends Routine {
 						.strafeTo(new Vector2d(54, -49.5))
 						.strafeTo(new Vector2d(10, -49.5))
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.75))//test position
-						.strafeTo(new Vector2d(16, -36))
+						.strafeTo(new Vector2d(16, -35.75))
 						.waitSeconds(0.5)
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.87))
-						.strafeTo(new Vector2d(12, -36))
+						.strafeTo(new Vector2d(12, -35.75))
 						.waitSeconds(0.5)
 						.stopAndAdd(new toggleClaw(clawSystem, false))
 						.waitSeconds(1)
-						.stopAndAdd(new setShoulderPos(clawSystem, 0.257))
-						.splineTo(new Vector2d(27, 8), 0)
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.32))
+						.splineTo(new Vector2d(28, 6), 0)
+						.stopAndAdd(new setShoulderPos(clawSystem,.253))
+						.waitSeconds(0.5)
+						.strafeTo(new Vector2d(16, 8))
+						.waitSeconds(0.4)
 						.stopAndAdd(new toggleClaw(clawSystem, true))
-//						.waitSeconds(1)
-//						.turn(-Math.PI/6)//trying to get third sample
-//						.splineTo(new Vector2d(25, -47),-Math.PI/6)
-//						.stopAndAdd(new setShoulderPos(clawSystem, 0.02))//test position
-//						.stopAndAdd(new toggleClaw(clawSystem, false))
-//						.waitSeconds(0.5)
-//						.turn(Math.PI/6)//correcting back from third sample
-//						.lineToXConstantHeading(18)
-//						.stopAndAdd(new setShoulderPos(clawSystem, 0.8))//hovering over the zone
-//						.waitSeconds(2)
-//						.stopAndAdd(new toggleClaw(clawSystem, true))
-//						.stopAndAdd(new setShoulderPos(clawSystem, 0.775))//test position
-//						.strafeTo(new Vector2d(10, -36))
+						.strafeTo(new Vector2d(10, -36))
 						.build()
 		);
 	}
