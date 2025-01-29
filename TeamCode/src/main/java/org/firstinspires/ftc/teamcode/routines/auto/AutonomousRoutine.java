@@ -66,7 +66,7 @@ public class AutonomousRoutine extends Routine {
 						.stopAndAdd(new toggleClaw(clawSystem, false))
 						.waitSeconds(1)
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.257))
-						.splineTo(new Vector2d(27, 8), 0)
+						.strafeTo(new Vector2d(27, 8))
 						.stopAndAdd(new toggleClaw(clawSystem, true))
 						.lineToXConstantHeading(18)
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.07))//test position
@@ -105,9 +105,10 @@ public class AutonomousRoutine extends Routine {
 						.stopAndAdd(new setShoulderPos(clawSystem,.253))
 						.waitSeconds(0.5)
 						.strafeTo(new Vector2d(16, 8))
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.1))
 						.waitSeconds(0.4)
 						.stopAndAdd(new toggleClaw(clawSystem, true))
-						.strafeTo(new Vector2d(10, -36))
+						.strafeTo(new Vector2d(5, -30))
 						.build()
 		);
 	}
