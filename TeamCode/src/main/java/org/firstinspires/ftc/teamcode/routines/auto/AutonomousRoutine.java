@@ -29,7 +29,7 @@ import org.firstinspires.ftc.teamcode.subsystems.ViperSystem;
 import java.util.Vector;
 
 
-@Autonomous(name = "Autonomous")
+@Autonomous(name = "Specimen-Auto")
 public class AutonomousRoutine extends Routine {
 	public ViperSystem viperSystem;
 	public ClawSystem clawSystem;

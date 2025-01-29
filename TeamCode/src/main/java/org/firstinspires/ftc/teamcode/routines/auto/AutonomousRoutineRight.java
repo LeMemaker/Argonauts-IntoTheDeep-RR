@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode.routines.auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.routines.Routine;
 import org.firstinspires.ftc.teamcode.subsystems.ClawSystem;
 import org.firstinspires.ftc.teamcode.subsystems.DriveSystem;
 import org.firstinspires.ftc.teamcode.subsystems.ViperSystem;
 
+@Disabled
 @Autonomous(name = "AutonomousRight")
 public class AutonomousRoutineRight extends Routine {
 	public ViperSystem viperSystem;
