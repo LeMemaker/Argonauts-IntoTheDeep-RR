@@ -59,9 +59,16 @@ public class SampleAuto extends Routine {
 						.stopAndAdd(new setViperPower(viperSystem, 1))
 						.waitSeconds(1)//Test it out tmr
 						.stopAndAdd(new setViperPower(viperSystem, 0))
-						.stopAndAdd(new setShoulderPos(clawSystem, 0.52))
-						.waitSeconds(0.5)
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.53))
+						.waitSeconds(0.8)
 						.stopAndAdd(new toggleClaw(clawSystem, true))
+						.waitSeconds(1)
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.4))
+						.stopAndAdd(new setViperPower(viperSystem, -1))
+						.waitSeconds(0.6)//Test it out tmr
+						.stopAndAdd(new setViperPower(viperSystem, 0))
+
+
 						.waitSeconds(5)
 						.build()
 		);
