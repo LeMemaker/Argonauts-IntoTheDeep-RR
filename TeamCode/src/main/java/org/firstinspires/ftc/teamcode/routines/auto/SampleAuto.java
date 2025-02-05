@@ -49,11 +49,12 @@ public class SampleAuto extends Routine {
 
 		Actions.runBlocking(
 				drive.actionBuilder(beginPose)
-						.stopAndAdd(new setShoulderPos(clawSystem, 0.0253))
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.03))
 						.stopAndAdd(new toggleClaw(clawSystem, false))
-						.waitSeconds(1)
-						.strafeTo(new Vector2d(8, 45))
-						.turn(-Math.PI/4)
+						.waitSeconds(.75)
+						.strafeToLinearHeading(new Vector2d(8, 45), -Math.PI/4)
+//						.strafeTo(new Vector2d(8, 45))
+//						.turn(-Math.PI/4)
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.4))
 						.waitSeconds(0.5)
 						.stopAndAdd(new setViperPower(viperSystem, 1))
@@ -62,13 +63,78 @@ public class SampleAuto extends Routine {
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.53))
 						.waitSeconds(0.8)
 						.stopAndAdd(new toggleClaw(clawSystem, true))
-						.waitSeconds(1)
+						.waitSeconds(0.5)
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.4))
 						.stopAndAdd(new setViperPower(viperSystem, -1))
-						.waitSeconds(0.6)//Test it out tmr
+						.waitSeconds(0.7)//Test it out tmr
 						.stopAndAdd(new setViperPower(viperSystem, 0))
-
-
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.07))//test position
+						.strafeToLinearHeading(new Vector2d(24, 36), 0.0)//needs testing, lining up with first sample
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.03))//test position
+						.waitSeconds(0.5)
+						.stopAndAdd(new toggleClaw(clawSystem, false))
+						.waitSeconds(0.25)
+						.strafeToLinearHeading(new Vector2d(8, 45), -Math.PI/4)
+//						.strafeTo(new Vector2d(8, 45))
+//						.turn(-Math.PI/4)
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.4))
+						.waitSeconds(0.5)
+						.stopAndAdd(new setViperPower(viperSystem, 1))
+						.waitSeconds(1)//Test it out tmr
+						.stopAndAdd(new setViperPower(viperSystem, 0))
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.53))
+						.waitSeconds(0.8)
+						.stopAndAdd(new toggleClaw(clawSystem, true))
+						.waitSeconds(0.5)
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.4))
+						.stopAndAdd(new setViperPower(viperSystem, -1))
+						.waitSeconds(0.7)//Test it out tmr
+						.stopAndAdd(new setViperPower(viperSystem, 0))
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.07))//test position
+						.strafeToLinearHeading(new Vector2d(24, 46), 0.0)//needs testing, lining up with first sample
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.03))//test position
+						.waitSeconds(0.5)
+						.stopAndAdd(new toggleClaw(clawSystem, false))
+						.waitSeconds(0.25)
+						.strafeToLinearHeading(new Vector2d(8, 45), -Math.PI/4)
+//						.strafeTo(new Vector2d(8, 45))
+//						.turn(-Math.PI/4)
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.4))
+						.waitSeconds(0.5)
+						.stopAndAdd(new setViperPower(viperSystem, 1))
+						.waitSeconds(1)//Test it out tmr
+						.stopAndAdd(new setViperPower(viperSystem, 0))
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.53))
+						.waitSeconds(0.8)
+						.stopAndAdd(new toggleClaw(clawSystem, true))
+						.waitSeconds(0.5)
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.4))
+						.stopAndAdd(new setViperPower(viperSystem, -1))
+						.waitSeconds(0.7)//Test it out tmr
+						.stopAndAdd(new setViperPower(viperSystem, 0))
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.07))//test position
+						.strafeToLinearHeading(new Vector2d(28, 46), Math.PI/4-Math.PI/16)
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.03))//test position
+						.waitSeconds(0.5)
+						.stopAndAdd(new toggleClaw(clawSystem, false))
+						.waitSeconds(0.25)
+						.strafeToLinearHeading(new Vector2d(8, 45), -Math.PI/4)
+//						.strafeTo(new Vector2d(8, 45))
+//						.turn(-Math.PI/4)
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.4))
+						.waitSeconds(0.5)
+						.stopAndAdd(new setViperPower(viperSystem, 1))
+						.waitSeconds(1)//Test it out tmr
+						.stopAndAdd(new setViperPower(viperSystem, 0))
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.53))
+						.waitSeconds(0.8)
+						.stopAndAdd(new toggleClaw(clawSystem, true))
+						.waitSeconds(0.5)
+						.stopAndAdd(new setShoulderPos(clawSystem, 0.4))
+						.stopAndAdd(new setViperPower(viperSystem, -1))
+						.waitSeconds(0.7)//Test it out tmr
+						.stopAndAdd(new setViperPower(viperSystem, 0))
+						.turn(Math.PI/4)
 						.waitSeconds(5)
 						.build()
 		);
