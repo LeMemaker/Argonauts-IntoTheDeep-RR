@@ -113,7 +113,7 @@ public class SampleAuto extends Routine {
 						.waitSeconds(0.7)//Test it out tmr
 						.stopAndAdd(new setViperPower(viperSystem, 0))
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.07))//test position
-						.strafeToLinearHeading(new Vector2d(28, 46), Math.PI/4-Math.PI/16)
+						.strafeToLinearHeading(new Vector2d(27.5, 46), Math.PI/4-Math.PI/16)
 						.stopAndAdd(new setShoulderPos(clawSystem, 0.03))//test position
 						.waitSeconds(0.5)
 						.stopAndAdd(new toggleClaw(clawSystem, false))
