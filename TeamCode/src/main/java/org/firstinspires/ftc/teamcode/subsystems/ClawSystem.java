@@ -56,7 +56,7 @@ public class ClawSystem extends Subsystem
 
     private double deltaPos;
     final double OPEN = 0.55;
-    final double CLOSE = 0.75;// TEST THEM OUT AFTERNOON
+    final double CLOSE = 0.73;//0.75 // TEST THEM OUT AFTERNOON
 
     final double EXTENDED = 0.25;
 
@@ -68,7 +68,7 @@ public class ClawSystem extends Subsystem
     final double SAMPLE_POS = 0.0544;// Test these 4 tomorrow
     final double EXT_SAMPLE_POS = 0.0833;
 
-    final double SPEC_POS = 0.743;
+    final double SPEC_POS = 0.75;
 
     final double CHAMBER_POS = 0.3;
 

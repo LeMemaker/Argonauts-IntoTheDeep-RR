@@ -146,10 +146,10 @@ public class AutonomousRoutine extends Routine {
 		@Override
 		public boolean run(@NonNull TelemetryPacket telemetryPacket) {
 			if(open){
-				clawSystem.openClaw();
+				clawSystem.setClawPos(0.55);
 			}
 			else {
-				clawSystem.closeClaw();
+				clawSystem.setClawPos(0.75);
 			}
 			return false;
 		}
