@@ -167,6 +167,10 @@ public class ClawSystem extends Subsystem
         return this.shoulder_cont_l.getPower();
     }
 
+    public boolean isOpen(){
+        return this.isOpen;
+    }
+
     public void toggleClaw(boolean toggle){
 
         if(toggle && !openChanged){

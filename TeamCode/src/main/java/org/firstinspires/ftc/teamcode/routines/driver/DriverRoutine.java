@@ -14,6 +14,8 @@ public class DriverRoutine extends Routine {
 	public ClawSystem clawSystem;
 	public DriveSystem driveSystem;
 
+	private double threshold = 0.3;
+
 	@Override
 	public void onInit() {
 		super.onInit();
@@ -72,7 +74,12 @@ public class DriverRoutine extends Routine {
 				}
 			}
 
-
+			if((Math.abs(gamepad1.left_stick_x) > threshold || Math.abs(gamepad1.left_stick_y) > threshold || Math.abs(gamepad1.right_stick_x) > threshold)&& clawSystem.isOpen()){
+				clawSystem.setClawPos(0.0);//test
+			}
+			else if(clawSystem.isOpen()){
+				clawSystem.setClawPos(0.55);
+			}
 
 			telemetry.update();
 		}
