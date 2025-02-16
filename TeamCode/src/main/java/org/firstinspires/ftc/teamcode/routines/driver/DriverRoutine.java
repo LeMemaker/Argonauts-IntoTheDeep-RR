@@ -14,7 +14,7 @@ public class DriverRoutine extends Routine {
 	public ClawSystem clawSystem;
 	public DriveSystem driveSystem;
 
-	private double threshold = 0.3;
+	private double threshold = 0.6;
 
 	@Override
 	public void onInit() {
@@ -76,7 +76,7 @@ public class DriverRoutine extends Routine {
 
 			if((Math.abs(gamepad1.left_stick_x) > threshold || Math.abs(gamepad1.left_stick_y) > threshold || Math.abs(gamepad1.right_stick_x) > threshold)&& clawSystem.isOpen()){
 				clawSystem.setClawPos(0.0);//test
-			}
+			}// Maybe add this for vipers as well
 			else if(clawSystem.isOpen()){
 				clawSystem.setClawPos(0.55);
 			}
