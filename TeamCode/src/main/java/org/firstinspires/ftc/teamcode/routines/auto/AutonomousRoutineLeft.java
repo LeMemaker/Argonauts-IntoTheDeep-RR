@@ -35,10 +35,8 @@ public class AutonomousRoutineLeft extends Routine {
 		}catch(InterruptedException e){
 
 		}
-		driveSystem.getDrive_motor_fl().setPower(-motorPower);
-		driveSystem.getDrive_motor_fr().setPower(-motorPower);
-		driveSystem.getDrive_motor_bl().setPower(motorPower);
-		driveSystem.getDrive_motor_br().setPower(motorPower);
+		driveSystem.getDrive_motor_L().setPower(-motorPower);
+		driveSystem.getDrive_motor_R().setPower(-motorPower);
 		try
 		{
 			Thread.sleep(5000);
@@ -47,10 +45,8 @@ public class AutonomousRoutineLeft extends Routine {
 
 		}
 
-		driveSystem.getDrive_motor_fl().setPower(0);
-		driveSystem.getDrive_motor_fr().setPower(0);
-		driveSystem.getDrive_motor_bl().setPower(0);
-		driveSystem.getDrive_motor_br().setPower(0);
+		driveSystem.getDrive_motor_L().setPower(0);
+		driveSystem.getDrive_motor_R().setPower(0);
 		try
 		{
 			Thread.sleep(40000);
