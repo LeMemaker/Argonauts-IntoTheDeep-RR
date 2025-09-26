@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.subsystems.DriveSystem;
 import org.firstinspires.ftc.teamcode.subsystems.System;
 import org.firstinspires.ftc.teamcode.subsystems.ViperSystem;
 
-@TeleOp(name = "Driver")
+@TeleOp(name = "Sasha")
 public class DriverRoutine extends Routine {
 	public ViperSystem viperSystem;
 	public ClawSystem clawSystem;
@@ -21,7 +21,7 @@ public class DriverRoutine extends Routine {
 		super.onInit();
 //		viperSystem = new ViperSystem(this);
 //		clawSystem = new ClawSystem(this);
-//		driveSystem = new DriveSystem(this);
+		driveSystem = new DriveSystem(this);
 	}
 
 	@Override
