@@ -8,32 +8,46 @@ import org.firstinspires.ftc.teamcode.routines.Routine;
 public class DriveSystem extends Subsystem
 {
 
-    private DcMotor drive_motor_L;
-    private DcMotor drive_motor_R;
+    private DcMotor drive_motor_fl;
+    private DcMotor drive_motor_fr;
 
-    public DcMotor getDrive_motor_L()
+    private DcMotor drive_motor_bl;
+
+    private DcMotor drive_motor_br;
+
+    public DcMotor getDrive_motor_fl()
     {
-        return drive_motor_L;
+        return drive_motor_fl;
     }
 
-    public DcMotor getDrive_motor_R()
+    public DcMotor getDrive_motor_fr()
     {
-        return drive_motor_R;
+        return drive_motor_fr;
+    }
+
+    public DcMotor getDrive_motor_bl()
+    {
+        return drive_motor_bl;
+    }
+
+    public DcMotor getDrive_motor_br()
+    {
+        return drive_motor_br;
     }
 
     public void driveOnTick(double x, double y, double rx) {
 
         x = -x;
 
-        getDrive_motor_L().setPower((y - x - rx));
-        getDrive_motor_R().setPower((y + x - rx));
+        getDrive_motor_fl().setPower((y - x - rx));
+        getDrive_motor_fr().setPower((y + x - rx));
     }
 
 
 
     public void driveOnTickVector(double x, double y, double rx){
-//        x = -x;
-//        rx = -rx;
+        x = -x;
+        rx = -rx;
         double theta = Math.atan2(y, x);
         double power = Math.hypot(x, y);
 
@@ -49,20 +63,27 @@ public class DriveSystem extends Subsystem
             rightFront /= power + Math.abs(rx);
         }
 
-        getDrive_motor_L().setPower(leftFront);
-        getDrive_motor_R().setPower(-rightFront);
+        getDrive_motor_fl().setPower(leftFront);
+        getDrive_motor_fr().setPower(-rightFront);
     }
 
     public DriveSystem(Routine routine)
     {
         super(routine);
-        drive_motor_L = routine.hardwareMap.get(DcMotor.class, "drive_motor_L");
-        drive_motor_R = routine.hardwareMap.get(DcMotor.class, "drive_motor_R");
+        drive_motor_fl = routine.hardwareMap.get(DcMotor.class, "drive_motor_fl");
+        drive_motor_fr = routine.hardwareMap.get(DcMotor.class, "drive_motor_fr");
+        drive_motor_bl = routine.hardwareMap.get(DcMotor.class, "drive_motor_bl");
+        drive_motor_br = routine.hardwareMap.get(DcMotor.class, "drive_motor_br");
 
-        drive_motor_L.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        drive_motor_R.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        drive_motor_fl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        drive_motor_fr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        drive_motor_bl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        drive_motor_br.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-//        drive_motor_fr.setDirection(DcMotorSimple.Direction.REVERSE);
-//        drive_motor_bl.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        drive_motor_fl.setDirection(DcMotorSimple.Direction.REVERSE);
+        drive_motor_fr.setDirection(DcMotorSimple.Direction.REVERSE);
+        drive_motor_bl.setDirection(DcMotorSimple.Direction.REVERSE);
+        drive_motor_br.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 }
