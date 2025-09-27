@@ -10,9 +10,7 @@ public class DriveSystem extends Subsystem
 
     private DcMotor drive_motor_fl;
     private DcMotor drive_motor_fr;
-
     private DcMotor drive_motor_bl;
-
     private DcMotor drive_motor_br;
 
     public DcMotor getDrive_motor_fl()
@@ -36,11 +34,12 @@ public class DriveSystem extends Subsystem
     }
 
     public void driveOnTick(double x, double y, double rx) {
-
         x = -x;
 
-        getDrive_motor_fl().setPower((y - x - rx));
-        getDrive_motor_fr().setPower((y + x - rx));
+        getDrive_motor_fl().setPower(-(y + x + rx));
+        getDrive_motor_fr().setPower(-(y - x + rx));
+        getDrive_motor_bl().setPower((y - x - rx));
+        getDrive_motor_br().setPower((y + x - rx));
     }
 
 
@@ -57,14 +56,20 @@ public class DriveSystem extends Subsystem
 
         double leftFront = power * cos/max + rx;
         double rightFront = power * sin/max - rx;
+        double leftRear = power * sin/max + rx;
+        double rightRear = power * cos/max - rx;
 
         if ((power + Math.abs(rx)) > 1) {
             leftFront   /= power + Math.abs(rx);
             rightFront /= power + Math.abs(rx);
+            leftRear    /= power + Math.abs(rx);
+            rightRear  /= power + Math.abs(rx);
         }
 
         getDrive_motor_fl().setPower(leftFront);
         getDrive_motor_fr().setPower(-rightFront);
+        getDrive_motor_bl().setPower(leftRear);
+        getDrive_motor_br().setPower(-rightRear);
     }
 
     public DriveSystem(Routine routine)
@@ -76,14 +81,11 @@ public class DriveSystem extends Subsystem
         drive_motor_br = routine.hardwareMap.get(DcMotor.class, "drive_motor_br");
 
         drive_motor_fl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        drive_motor_fr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         drive_motor_bl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        drive_motor_fr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         drive_motor_br.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-
-        drive_motor_fl.setDirection(DcMotorSimple.Direction.REVERSE);
-        drive_motor_fr.setDirection(DcMotorSimple.Direction.REVERSE);
-        drive_motor_bl.setDirection(DcMotorSimple.Direction.REVERSE);
-        drive_motor_br.setDirection(DcMotorSimple.Direction.REVERSE);
+//        drive_motor_fr.setDirection(DcMotorSimple.Direction.REVERSE);
+//        drive_motor_bl.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 }

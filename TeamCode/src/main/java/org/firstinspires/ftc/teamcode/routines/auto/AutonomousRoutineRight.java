@@ -37,8 +37,10 @@ public class AutonomousRoutineRight extends Routine {
 
 		}
 		clawSystem.setShoulderPos(0.29);
-		driveSystem.getDrive_motor_L().setPower(-motorPower);
-		driveSystem.getDrive_motor_R().setPower(motorPower);
+		driveSystem.getDrive_motor_fl().setPower(-motorPower);
+		driveSystem.getDrive_motor_fr().setPower(motorPower);
+		driveSystem.getDrive_motor_bl().setPower(-motorPower);
+		driveSystem.getDrive_motor_br().setPower(motorPower);
 		try
 		{
 			Thread.sleep(1800);
@@ -47,8 +49,10 @@ public class AutonomousRoutineRight extends Routine {
 
 		}
 		//------
-		driveSystem.getDrive_motor_L().setPower(0);
-		driveSystem.getDrive_motor_R().setPower(0);
+		driveSystem.getDrive_motor_fl().setPower(0);
+		driveSystem.getDrive_motor_fr().setPower(0);
+		driveSystem.getDrive_motor_bl().setPower(0);
+		driveSystem.getDrive_motor_br().setPower(0);
 
 		try
 		{
@@ -60,8 +64,10 @@ public class AutonomousRoutineRight extends Routine {
 		clawSystem.setClawPos(0.55);
 
 
-		driveSystem.getDrive_motor_L().setPower(motorPower);
-		driveSystem.getDrive_motor_R().setPower(-motorPower);
+		driveSystem.getDrive_motor_fl().setPower(motorPower);
+		driveSystem.getDrive_motor_fr().setPower(-motorPower);
+		driveSystem.getDrive_motor_bl().setPower(motorPower);
+		driveSystem.getDrive_motor_br().setPower(-motorPower);
 		try
 		{
 			Thread.sleep(1800);
@@ -70,8 +76,10 @@ public class AutonomousRoutineRight extends Routine {
 
 		}
 		//------
-		driveSystem.getDrive_motor_L().setPower(0);
-		driveSystem.getDrive_motor_R().setPower(0);
+		driveSystem.getDrive_motor_fl().setPower(0);
+		driveSystem.getDrive_motor_fr().setPower(0);
+		driveSystem.getDrive_motor_bl().setPower(0);
+		driveSystem.getDrive_motor_br().setPower(0);
 
 		try
 		{
@@ -92,8 +100,10 @@ public class AutonomousRoutineRight extends Routine {
 
 		}*/
 
-		driveSystem.getDrive_motor_L().setPower(0);
-		driveSystem.getDrive_motor_R().setPower(0);
+		driveSystem.getDrive_motor_fl().setPower(0);
+		driveSystem.getDrive_motor_fr().setPower(0);
+		driveSystem.getDrive_motor_bl().setPower(0);
+		driveSystem.getDrive_motor_br().setPower(0);
 		try
 		{
 			Thread.sleep(40000);
